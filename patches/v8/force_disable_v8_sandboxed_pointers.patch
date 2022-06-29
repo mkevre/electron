@@ -22,3 +22,24 @@ index 87f6f3ccbf822b24d80af06cc68ebb90084d0d75..98ffffb7a37009d2919b65f7c263d4bc
  
  # Enable all available sandbox features if sandbox future is enabled.
  if (v8_enable_sandbox_future) {
+diff --git a/src/api/api.cc b/src/api/api.cc
+index e547c8e86284daba6665528d811a63729df7ad8b..383272e74a8a6acb9a443bd70a1ed7fb5593cb99 100644
+--- a/src/api/api.cc
++++ b/src/api/api.cc
+@@ -7976,14 +7976,14 @@ std::unique_ptr<v8::BackingStore> v8::ArrayBuffer::NewBackingStore(
+     void* data, size_t byte_length, v8::BackingStore::DeleterCallback deleter,
+     void* deleter_data) {
+   CHECK_LE(byte_length, i::JSArrayBuffer::kMaxByteLength);
+-#ifdef V8_ENABLE_SANDBOX
++#ifdef V8_SANDBOXED_POINTERS
+   Utils::ApiCheck(
+       !data || i::GetProcessWideSandbox()->Contains(data),
+       "v8_ArrayBuffer_NewBackingStore",
+       "When the V8 Sandbox is enabled, ArrayBuffer backing stores must be "
+       "allocated inside the sandbox address space. Please use an appropriate "
+       "ArrayBuffer::Allocator to allocate these buffers.");
+-#endif  // V8_ENABLE_SANDBOX
++#endif  // V8_SANDBOXED_POINTERS
+ 
+   std::unique_ptr<i::BackingStoreBase> backing_store =
+       i::BackingStore::WrapAllocation(data, byte_length, deleter, deleter_data,
