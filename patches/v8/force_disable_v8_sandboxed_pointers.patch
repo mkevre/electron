@@ -6,7 +6,7 @@ Subject: force disable v8 sandboxed pointers
 temporarily, until we can fix node to be compatible
 
 diff --git a/BUILD.gn b/BUILD.gn
-index 87f6f3ccbf822b24d80af06cc68ebb90084d0d75..98ffffb7a37009d2919b65f7c263d4bc1d6bbc61 100644
+index 1b91d1bd0e494bd7b330a0da4280c59e4dd9599f..60359ced28f31540cc6ad706430396155b638ec5 100644
 --- a/BUILD.gn
 +++ b/BUILD.gn
 @@ -506,9 +506,9 @@ if (v8_enable_sandbox == "") {
